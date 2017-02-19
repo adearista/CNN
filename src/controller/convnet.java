@@ -2568,7 +2568,7 @@ public class convnet {
                 gradienBP(index);
                 updatebobot_bias();
             }
-            System.out.println("mse-"+inc+"-["+(i)+"] : "+mse);
+            System.out.println("err:"+err+"|mse:"+inc+"|["+(i)+"] : "+mse);
             simpanbobot_bias();
             inc++;
         }
