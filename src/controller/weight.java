@@ -67,7 +67,8 @@ public class weight {
 	{                     
             temp1 = (rand.nextInt(100000)-50000);
             temp2 = (rand.nextInt(1000000));
-
+            
+            System.out.println("temp1: "+temp1 +"|"+"temp2:"+temp2);
             if((temp1 != 0) && (temp2 != 0))
             {
                 temp = temp1/temp2;
