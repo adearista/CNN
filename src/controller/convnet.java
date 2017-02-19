@@ -2506,7 +2506,7 @@ public class convnet {
     {
         int i,n,inc,index;
         double err,mse;
-        double EConvergen=(double) 1.224 ;
+        double EConvergen=(double) 1.0 ;
         String[] dirImage=new String[644];
         int[] label=new int[644];
 
@@ -2530,26 +2530,26 @@ public class convnet {
         mse=999999;
         while(mse>EConvergen)
         {
-  //          if(inc<=2)
-//            {
+            if(inc<=2)
+            {
                alpha=(double) 0.0005;
-//            }
-//            else if(inc<=5)
-//            {
-//                alpha=(double) 0.0002;
-//            }
-//            else if(inc<=8)
-//            {
-//                alpha=(double) 0.0001;
-//            }
-//            else if(inc<=12)
-//            {
-//                alpha=(double) 0.00005;
-//            }
-//            else
-//            {
-//                alpha=(double) 0.00001;
-//            }
+            }
+            else if(inc<=5)
+            {
+                alpha=(double) 0.0002;
+            }
+            else if(inc<=8)
+            {
+                alpha=(double) 0.0001;
+            }
+            else if(inc<=12)
+            {
+                alpha=(double) 0.00005;
+            }
+            else
+            {
+                alpha=(double) 0.00001;
+            }
 
             err=0;
             for(i=0;i<n;i++)
@@ -2562,13 +2562,21 @@ public class convnet {
                 }
                 index = label[i];
                 feedforward();
-                err=(double) (err + output[index]);
-                mse=err/(i+1);
+                
+                err = 0;
+                for (i=0; i<n; i++)
+                {
+                        err += (double) (err + output[index]); 
+                }
+
+                mse = err/n;
+                //err = (double) (err + output[index]);
+                //mse = err/(i+1);
               //  System.out.println("mse-"+inc+"-["+(i+1)+"] : "+mse);
                 gradienBP(index);
                 updatebobot_bias();
             }
-            System.out.println("err:"+err+"|mse:"+inc+"|["+(i)+"] : "+mse);
+            System.out.println("err:"+err+" |  mse:"+inc+"|["+(i)+"] : "+mse);
             simpanbobot_bias();
             inc++;
         }

@@ -191,6 +191,7 @@ public class formTraining extends javax.swing.JFrame {
         
         String str;
         
+        
        
         try {
             hm.setbobot_biasRandom();
