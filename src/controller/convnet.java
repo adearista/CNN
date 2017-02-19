@@ -2506,7 +2506,7 @@ public class convnet {
     {
         int i,n,inc,index;
         double err,mse;
-        double EConvergen=(double) 1.0 ;
+        double EConvergen=(double) 0.1 ;
         String[] dirImage=new String[644];
         int[] label=new int[644];
 
@@ -2564,9 +2564,10 @@ public class convnet {
                 feedforward();
                 
                 err = 0;
+                
                 for (i=0; i<n; i++)
                 {
-                        err += (double) (err + output[index]); 
+                        err = (double) (err + output[index]); 
                 }
 
                 mse = err/n;
@@ -2875,18 +2876,20 @@ public class convnet {
                 } catch (IOException ex) {
                     Logger.getLogger(convnet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                    feedforward();
+                
+                feedforward();
 
                     for(j=0;j<46;j++)
                     {
                         if (output[j]< min )
                         {
-                            min=output[j];
-                            hsl=j;
-                            
+                            min = output[j];
+                            hsl = j;                            
                         }
+                        System.out.println("output "+output[j]);
                     }
-                    System.out.println("hasil "+hsl);
+                    //System.out.println("min "+min);
+                    //System.out.println("hasil "+hsl);
                     
                     akurasiPerAngka[label[i]]=akurasiPerAngka[label[i]]+1; //hitung banyak data set per Angka
                     
@@ -2992,12 +2995,11 @@ public class convnet {
             
             total=(float)(akhir-inc)/akhir;
             akurasitotal=(float)total*100;
-
-
-            System.out.println("total gambar = "+(akhir-awal));
-            System.out.println("berhasil = "+(akhir-inc));
-            System.out.println("gagal = "+inc);
-            System.out.println("akurasi = "+akurasitotal+" %");
+  
+            uites.totalgambar.setText(" "+(akhir-awal));
+            uites.berhasil.setText(" "+(akhir-inc));
+            uites.gagal.setText(" "+inc);
+            uites.akurasi.setText(" "+akurasitotal+"%");
     }
 
 
@@ -3334,10 +3336,13 @@ public class convnet {
             for(i=0;i<84;i++)
             {
                 power=power+Math.pow(f6[i] - target84[j][i], 2);
+                //System.out.println("f6 "+f6[i]);
+                //System.out.println("target "+target84[j][i]);
+               // System.out.println("power "+power);
             }
             output[j]=power;
+            //System.out.println("output "+output[j]);
         }
-       
     }
 
   
