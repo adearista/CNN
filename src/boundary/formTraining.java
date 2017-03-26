@@ -194,7 +194,7 @@ public class formTraining extends javax.swing.JFrame {
         
        
         try {
-            //hm.setbobot_biasRandom();
+            //hm.setbobot_biasRandomm();
             hm.setbobotTest();
         } catch (IOException ex) {
             Logger.getLogger(formTraining.class.getName()).log(Level.SEVERE, null, ex);
